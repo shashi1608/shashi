@@ -27,6 +27,18 @@ makeMatrix <- function(m = matrix()) {
 # computation. If not, it computes the inverse, sets the value in the cache via
 # setinverse function.
 
+
+cacheSolve <- function(t, ...) {
+  i <- t$getinverse()
+  if (!is.null(i)) {
+          message("getting cached data")
+          return(i)
+  }
+  data <- t$get()
+  i <- solve(data, ...)
+  t$setinverse(i)
+  i
+}
 ##sample run:
 ## > A <- matrix(c(5,6,7,8),2,2)
 ## > A1 <- makeMatrix(A)
